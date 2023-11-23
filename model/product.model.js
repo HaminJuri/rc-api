@@ -1,0 +1,45 @@
+const mongoose = require("mongoose");
+
+const ProductSchema = new mongoose.Schema({
+    createdAt: { type: Date, default: new Date(), once: true },
+    title: String,
+    serialNumber: { type: Number, require: true, unique: true },
+    brand: { type: String },
+    productPrice: { type: Number, require: true },
+    userProfit: { type: Number, require: true },
+    rcPrice: { type: Number, require: true },
+    category: String,
+    packagingType: String,
+    specifications: String,
+    madeIn: String,
+    quantity: Number,
+    maxQuantity: Number,
+    volume: String,
+    sales: { type: Number, default: 1 },
+    cars: [String],
+    image: String,
+    weight: { type: Number, default: 3 },
+    inBox: { type: Number, default: 1 },
+    description: String,
+    views: Number,
+    tags: [String],
+    suitableForAllCars: { type: Boolean, default: false },
+    suggestion: { type: Number, default: 10 },
+    isFreeShipping: { type: Boolean, default: false },
+    supplier: { type: String, require: true },
+    qualityGuarantor: { type: String, require: true },
+    authenticityGuarantor: { type: String, require: true },
+    search: String,
+});
+
+ProductSchema.index({
+    title: 1,
+    serialNumber: 1,
+    rcPrice: 1,
+    brand: 1,
+    category: 1,
+    image: 1,
+    quantity: 1,
+    tags: 1,
+});
+module.exports = mongoose.model("Product", ProductSchema);
